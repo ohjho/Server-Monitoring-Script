@@ -134,7 +134,7 @@ def main(machine_ulimit = None, slack_token = None, slack_channel = None, verbos
     else:
         #send_data(data)
         if slack_token:
-            send_slack_data(endpoint = args.endpoint, token = slack_token,
+            send_slack_data(endpoint = args.dest, token = slack_token,
                 channel = slack_channel, str_msg = format_machine_data(machine),
                 title = 'Server Monitor {args.interval}s update')
 
