@@ -34,7 +34,7 @@ def main(machine_ulimit = None, slack_token = None, slack_channel = None, verbos
 
     # Disk Info
     disk_info = psutil.disk_partitions()
-    print("Disks:")
+    #print("Disks:")
     disks = []
     for x in disk_info:
         # Try fixes issues with connected 'disk' such as CD-ROMS, Phones, etc.
@@ -60,7 +60,7 @@ def main(machine_ulimit = None, slack_token = None, slack_channel = None, verbos
 
     # Network Info
     nics = []
-    print("NICs:")
+    # print("NICs:")
     for name, snic_array in psutil.net_if_addrs().items():
         # Create NIC object
         nic = {
@@ -116,7 +116,7 @@ def main(machine_ulimit = None, slack_token = None, slack_channel = None, verbos
     }
 
     data = json.dumps(machine)
-    if verobse:
+    if verbose:
         print("\nData:")
         pprint.pprint(machine, indent=4)
 
@@ -233,7 +233,7 @@ while True:
         args.timeout = cfg['timeout']
         args.dest = cfg['dest']
         main(machine_ulimit=cfg['machine_ulimit'], slack_token = cfg['slack']['token'],
-            slack_channel = cfg['slack']['channel'], verbose=True)    
+            slack_channel = cfg['slack']['channel'], verbose=True)
     else:
         main(verbose = True)
     print("-----------------------------------------------------------------")
