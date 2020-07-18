@@ -124,7 +124,7 @@ def main(machine_ulimit = None, slack_token = None, slack_channel = None, verbos
         l_checks = [ machine[k] > float(v)
             for k, v in machine_ulimit.items()]
         if any(l_checks):
-            send_slack_data(endpoint = args.endpoint, token = slack_token,
+            send_slack_data(endpoint = args.dest, token = slack_token,
                 channel = slack_channel,
                 str_msg = format_machine_data(machine,
                     l_keys= ["hostname", "system", "uptime", "cpu_count", "cpu_usage",
