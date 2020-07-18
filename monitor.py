@@ -228,9 +228,9 @@ while True:
         with open(args.config, 'r') as ymlfile:
             cfg = yaml.load(ymlfile, Loader = yaml.BaseLoader)
             cfg = cfg['dev']['environment']
-        args.interval = cfg['interval']
-        args.attempts = cfg['attempts']
-        args.timeout = cfg['timeout']
+        args.interval = int(cfg['interval'])
+        args.attempts = int(cfg['attempts'])
+        args.timeout = int(cfg['timeout'])
         args.dest = cfg['dest']
         main(machine_ulimit=cfg['machine_ulimit'], slack_token = cfg['slack']['token'],
             slack_channel = cfg['slack']['channel'], verbose=True)
