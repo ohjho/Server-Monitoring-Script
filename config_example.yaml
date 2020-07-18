@@ -1,0 +1,14 @@
+dev:
+  environment:
+    interval: 30
+    attempts: 10
+    timeout: 60
+    dest: "https://slack.com/api/chat.postMessage"
+
+    machine_ulimit:
+      memory_used_percent: 80
+
+    slack:
+      token: "enter your token here"
+      channel: "#unixn00bs"
+      title: ""
