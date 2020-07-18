@@ -121,7 +121,7 @@ def main(machine_ulimit = None, slack_token = None, slack_channel = None, verbos
         pprint.pprint(machine, indent=4)
 
     if machine_ulimit:
-        l_checks = [ machine[k] > v
+        l_checks = [ machine[k] > float(v)
             for k, v in machine_ulimit.items()]
         if any(l_checks):
             send_slack_data(endpoint = args.endpoint, token = slack_token,
