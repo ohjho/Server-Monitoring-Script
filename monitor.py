@@ -210,7 +210,8 @@ def retry_if_result_none(result):
 @retry(stop_max_attempt_number = args.attempts, retry_on_result = retry_if_result_none)
 def send_slack_data(endpoint, token, channel, str_msg, title = ''):
     headers = {"authorization": f"Bearer {token}", "content-type": "application/json"}
-    payload = {"channel": channel, "text": f"*{title}*\n{str_msg}"}
+    text = f"*{title}*\n---------------------\n{str_msg}" if title else str_msg
+    payload = {"channel": channel, "text": text}
     try:
         response = requests.post( url = endpoint, data = json.dumps(payload), headers = headers)
         if response.status_code != 200:
