@@ -249,7 +249,7 @@ def main(endpoint = None, machine_ulimit = None, slack_token = None, slack_chann
         l_checks = [ machine[k] > float(v)
             for k, v in machine_ulimit.items()]
         if any(l_checks) and endpoint:
-            l_limit_reached = [k for c, k in zip(l_checks, list(machine_ulimit.keys())) if c]
+            l_limit_reached = [f"`{k}`" for c, k in zip(l_checks, list(machine_ulimit.keys())) if c]
 
             send_slack_data(endpoint = endpoint, token = slack_token,
                 channel = slack_channel,
