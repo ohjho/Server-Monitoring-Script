@@ -1,7 +1,7 @@
 # Server Monitoring Script (with reporting to Slack)
 
 [![GitHub license](https://img.shields.io/github/license/ohjho/Server-Monitoring-Script.svg)](https://github.com/ohjho/Server-Monitoring-Script/blob/master/LICENSE.md) [![Build Status](https://travis-ci.com/ohjho/Server-Monitoring-Script.svg?branch=master)](https://travis-ci.com/ohjho/Server-Monitoring-Script)
-[![Code Coverage](https://codecov.io/gh/ohjho/Server-Monitoring-Script/branch/master/graphs/badge.svg)](https://codecov.io/gh/ohjho/Server-Monitoring-Script) ![GitHub Size](https://img.shields.io/github/repo-size/ohjho/Server-Monitoring-Script.svg)
+[![Code Coverage](https://codecov.io/gh/ohjho/Server-Monitoring-Script/branch/master/graphs/badge.svg)](https://codecov.io/gh/ohjho/Server-Monitoring-Script) ![GitHub Size](https://img.shields.io/github/repo-size/ohjho/Server-Monitoring-Script.svg) ![Python 3.7](https://img.shields.io/badge/made%20with-Py3.7-darkblue)
 
 ## Purpose
 
@@ -79,22 +79,20 @@ Example:
 }
 ```
 
-This script can be installed on several machines that report to a central monitoring server.
+This script can be installed on several machines that report to a central Slack channel.
 
 The destination, checking interval, sending attempts after failure and timeout between resending attempts can be set through arguments, use `python3 server_monitor.py -h` for more.
 
 ## Usage
 
-Clone the script with `git clone`.
+Shallow Clone the repo with `git clone --depth 1 https://github.com/ohjho/Server-Monitoring-Script.git`.
 
-Install Python.
+Make sure you have Python 3.7 and install the required libraries `pip3 install -r requirements.txt`.
 
-Install the required libraries `pip3 install -r requirements.txt`.
-
-To test the script output run with `python3 server_monitor.py`.
+To test the script output run `python3 server_monitor.py`.
 
 ### Use with a config file
-You can supply a config file like `python3 server_monitor.py -c config.yaml` to gain more control of the monitor and only get slack messages when limits are reached. [Here's](config_example.yaml) an example config file:
+You can supply a config file by `python3 server_monitor.py -c config.yaml` to gain more control of the monitor and only get slack messages when limits are reached. [Here's](config_example.yaml) an example config file:
 ```
 dev:
   environment:
@@ -119,7 +117,7 @@ dev:
 After your app is created, in **OAuth & Permissions** features, under _Scopes_ make sure you have the following _Bot Token Scopes_:
 ![Bot Token Scope Screenshot](slack_scope_screenshot.png)
 
-Install the app, then copy the _Bot User OAuth Access Token_ for use with the server_monitor script
+Install the app, then copy the **Bot User OAuth Access Token** for use with the server_monitor script
 
 ### **Linux Autostart** with [`supervisord`](https://serversforhackers.com/c/monitoring-processes-with-supervisord)
 install `supervisor` (also written in python):
@@ -161,4 +159,7 @@ then restart the server
 
 [MF Softworks](https://github.com/mfcodeworks) for the original code
 
-[JHO](https://github.com/ohjho) for these new features
+[JHO](https://github.com/ohjho) for these new features:
+* [config file](https://github.com/ohjho/Server-Monitoring-Script#use-with-a-config-file)
+* [slack reporting](https://github.com/ohjho/Server-Monitoring-Script#slack-setup)
+* [autostart with supervisor](https://github.com/ohjho/Server-Monitoring-Script#linux-autostart-with-supervisord)
