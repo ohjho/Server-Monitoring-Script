@@ -12,6 +12,12 @@ try:
 except:
     HAS_CUDA = False
 
+def gpu_count():
+    if not HAS_CUDA:
+        return 0
+    else:
+        return pynvml.nvmlDeviceGetCount()
+
 def gpu_mem_used_pct():
     '''
     return a list of percentage of memory used
@@ -243,6 +249,8 @@ def main(endpoint = None, machine_ulimit = None, slack_token = None, slack_chann
         l_checks = [ machine[k] > float(v)
             for k, v in machine_ulimit.items()]
         if any(l_checks) and endpoint:
+            l_limit_reached = [k for c, k in zip(l_checks, list(machine_ulimit.keys())) if c]
+
             send_slack_data(endpoint = endpoint, token = slack_token,
                 channel = slack_channel,
                 str_msg = format_machine_data(machine,
@@ -250,7 +258,7 @@ def main(endpoint = None, machine_ulimit = None, slack_token = None, slack_chann
                         "memory_used_percent", "root_drive_used_percent", "gpu_memory_max_used_percent",
                         "timestamp"]
                     ),
-                title = f'Server Monitor LIMIT ({list(machine_ulimit.keys())}) REACHED')
+                title = f'Server Monitor LIMIT ({l_limit_reached}) REACHED')
     else: # send everything
         if endpoint:
             send_slack_data(endpoint = endpoint, token = slack_token,
