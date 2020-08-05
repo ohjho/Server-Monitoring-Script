@@ -258,7 +258,7 @@ def main(endpoint = None, machine_ulimit = None, slack_token = None, slack_chann
                         "memory_used_percent", "root_drive_used_percent", "gpu_memory_max_used_percent",
                         "timestamp"]
                     ),
-                title = f'Server Monitor LIMIT ({l_limit_reached}) REACHED')
+                title = f'Server Monitor LIMIT ({", ".join(l_limit_reached)}) REACHED')
     else: # send everything
         if endpoint:
             send_slack_data(endpoint = endpoint, token = slack_token,
@@ -286,8 +286,9 @@ if __name__ == '__main__':
             with open(args.config, 'r') as ymlfile:
                 cfg = yaml.load(ymlfile, Loader = yaml.BaseLoader)
                 cfg = cfg['dev']['environment']
+
+            args.interval = int(cfg['interval'])
             # --- DEPRECATED ---
-            # args.interval = int(cfg['interval'])
             # args.attempts = int(cfg['attempts'])
             # args.timeout = int(cfg['timeout'])
             main(endpoint = cfg['dest'], machine_ulimit=cfg['machine_ulimit'],
