@@ -7,6 +7,8 @@ dev:
 
     machine_ulimit:
       memory_used_percent: 80
+      root_drive_used_percent: 80
+      gpu_memory_max_used_percent: 50
 
     slack:
       token: "enter your token here"
