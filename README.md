@@ -5,8 +5,8 @@
 
 ## Purpose
 
-The Python script is a **modified version of [mfcodeworks' version](https://github.com/mfcodeworks/Server-Monitoring-Script)** designed to be run as a ~cronjob~ [supervisor process](http://supervisord.org/) on every boot in the background.
-The script will gather information **and send updates in the form of a Slack message**:
+The Python script is a modified version of [mfcodeworks' version](https://github.com/mfcodeworks/Server-Monitoring-Script) designed to be run as a [supervisor process](http://supervisord.org/) on every boot in the background.
+The script will gather information and send updates in the form of a **Slack message**:
 
 - UUID (Unique for each system to avoid overlapping hostname for multi-network monitoring)
 - Hostname
@@ -23,14 +23,14 @@ The script will gather information **and send updates in the form of a Slack mes
 The script will produce a [JSON output](output_example.json) at intervals for use with any software or server accepting a JSON input and send a slack message like:
 >Server Monitor LIMIT (`root_drive_used_percent`) REACHED
 >---------------------
->hostname : `name-of-your-server`
->system : `{'name': 'Linux', 'version': '4.9.0-11-amd64'}`
->uptime : `68129`
->cpu_count : `16`
->cpu_usage : `0.2`
->memory_used_percent : `46.3`
->root_drive_used_percent : `88.6`
->timestamp : `2020-08-05T03:28:05+00:00`
+>hostname : `name-of-your-server`<br>
+>system : `{'name': 'Linux', 'version': '4.9.0-11-amd64'}`<br>
+>uptime : `68129`<br>
+>cpu_count : `16`<br>
+>cpu_usage : `0.2`<br>
+>memory_used_percent : `46.3`<br>
+>root_drive_used_percent : `88.6`<br>
+>timestamp : `2020-08-05T03:28:05+00:00`<br>
 >gpu_memory_max_used_percent : `26.53`
 
 This script can be installed on several machines that report to a central Slack channel.
