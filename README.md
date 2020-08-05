@@ -20,64 +20,18 @@ The script will gather information **and send updates in the form of a Slack mes
 - System Uptime
 - UTC Timestamp
 
-The script will produce a JSON output at intervals for use with any software or server accepting a JSON input.
-Example:
-
-```json
-{
-    "hostname": "HOME-LAPTOP1",
-    "system": {
-        "name": "Windows",
-        "version": "10"
-    },
-    "uptime" : 231199,
-    "cpu_count": 4,
-    "cpu_usage": 17.9,
-    "memory_total": 8440942592,
-    "memory_used": 6244225024,
-    "memory_used_percent": 74.0,
-    "drives": [
-        {
-            "name": "C:\\",
-            "mount_point": "C:\\",
-            "type": "NTFS",
-            "total_size": 536224985088,
-            "used_size": 167306108928,
-            "percent_used": 31.2
-        },
-        {
-            "name": "D:\\",
-            "mount_point": "D:\\",
-            "type": "NTFS",
-            "total_size": 463332921344,
-            "used_size": 49498419200,
-            "percent_used": 10.7
-        }
-    ],
-    "root_drive_used_percent" : 88.6,
-    "network_up": 54,
-    "network_down": 4150,
-    "network_cards": [
-        {
-            "address": "127.0.0.1",
-            "address6": "::1",
-            "mac": "",
-            "name": "Loopback Pseudo-Interface 1",
-            "netmask": "255.0.0.0"
-        },
-        {
-            "address": "10.15.62.112",
-            "address6": "fe80::844d:a87:54ea:2100",
-            "mac": "1C-39-47-A6-4C-5E",
-            "name": "Ethernet",
-            "netmask": "255.255.0.0"
-        }
-    ],
-    "timestamp" : "2018-10-10T01:41:21+00:00",
-    "uuid" : 180331603484325,
-    "gpu_memory_max_used_percent" : 26.53
-}
-```
+The script will produce a [JSON output](output_example.json) at intervals for use with any software or server accepting a JSON input and send a slack message like:
+>Server Monitor LIMIT (`root_drive_used_percent`) REACHED
+>---------------------
+>hostname : `name-of-your-server`
+>system : `{'name': 'Linux', 'version': '4.9.0-11-amd64'}`
+>uptime : `68129`
+>cpu_count : `16`
+>cpu_usage : `0.2`
+>memory_used_percent : `46.3`
+>root_drive_used_percent : `88.6`
+>timestamp : `2020-08-05T03:28:05+00:00`
+>gpu_memory_max_used_percent : `26.53`
 
 This script can be installed on several machines that report to a central Slack channel.
 
@@ -85,11 +39,20 @@ The destination, checking interval, sending attempts after failure and timeout b
 
 ## Usage
 
-Shallow Clone the repo with `git clone --depth 1 https://github.com/ohjho/Server-Monitoring-Script.git`.
+Shallow Clone the repo with
+```
+git clone --depth 1 https://github.com/ohjho/Server-Monitoring-Script.git
+```
 
-Make sure you have Python 3.7 and install the required libraries `pip3 install -r requirements.txt`.
+Make sure you have Python 3.7 and install the required libraries
+```
+pip3 install -r requirements.txt
+```
 
-To test the script output run `python3 server_monitor.py`.
+To test the script output run
+```
+python3 server_monitor.py
+```
 
 ### Use with a config file
 You can supply a config file by `python3 server_monitor.py -c config.yaml` to gain more control of the monitor and only get slack messages when limits are reached. [Here's](config_example.yaml) an example config file:
@@ -115,6 +78,7 @@ dev:
 **Create New App** at [api.slack.com](https://api.slack.com/apps)
 
 After your app is created, in **OAuth & Permissions** features, under _Scopes_ make sure you have the following _Bot Token Scopes_:
+
 ![Bot Token Scope Screenshot](slack_scope_screenshot.png)
 
 Install the app, then copy the **Bot User OAuth Access Token** for use with the server_monitor script
